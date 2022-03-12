@@ -4,7 +4,9 @@ COPTS	:= -std=c++98 -pedantic
 INCLUDE	:= -I src
 
 NAME	:= a.out
-SRCS	:= ClapTrap.cpp main.cpp
+SRCS	:= \
+Animal.cpp      Dog.cpp         WrongCat.cpp\
+Cat.cpp         WrongAnimal.cpp main.cpp
 OBJS	:= $(SRCS:%.cpp=%.o)
 SRCS	:= $(addprefix src/, $(SRCS))
 OBJS	:= $(addprefix obj/, $(OBJS))
