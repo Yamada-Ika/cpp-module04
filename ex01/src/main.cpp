@@ -3,22 +3,20 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
-# define START() std::cout << __func__ << " start!" << std::endl;
-# define END() std::cout << __func__ << " end!" << std::endl;
+# define START() std::cout << "function : " << __func__ << " start!" << std::endl;
+# define END() std::cout << "function : " << __func__ << " end!" << std::endl;
+
+__attribute__((destructor))
+void destructor(void) {
+  system("leaks a.out");
+}
 
 void  NormalTest(void) {
   START();
-  const Animal* meta = new Animal();
   const Animal* j = new Dog();
   const Animal* i = new Cat();
-  std::cout << j->getType() << " " << std::endl;
-  std::cout << i->getType() << " " << std::endl;
-  i->makeSound();
-  j->makeSound();
-  meta->makeSound();
-  delete meta;
-  delete i;
   delete j;
+  delete i;
   END();
 }
 
