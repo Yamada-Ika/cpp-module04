@@ -42,11 +42,11 @@ void  WrongTest(void) {
 }
 
 int main(void) {
-    if (std::getenv("IYAMADA_CPP02_EX00_NORMAL") != NULL) {
+    if (std::getenv("IYAMADA_CPP04_EX00_NORMAL") != NULL) {
         NormalTest();
     }
 
-    if (std::getenv("IYAMADA_CPP02_EX00_WRONG") != NULL) {
+    if (std::getenv("IYAMADA_CPP04_EX00_WRONG") != NULL) {
         WrongTest();
     }
 
