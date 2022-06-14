@@ -5,12 +5,13 @@
 
 class Brain {
  private:
-    std::string ideas_[100];
+    static const int kNumberOfIdeas = 100;
+    std::string ideas_[kNumberOfIdeas];
 
  public:
     Brain(void);
     Brain(const Brain& other);
-    virtual ~Brain(void);
+    ~Brain(void);
     Brain& operator=(const Brain& other);
 };
 

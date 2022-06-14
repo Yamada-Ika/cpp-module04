@@ -6,8 +6,11 @@
 
 class Ice : public AMateria {
  public:
-    explicit Ice(void);
+    Ice(void);
+    Ice(const Ice& other);
     ~Ice(void);
+    Ice& operator=(const Ice& other);
+
     virtual AMateria* clone(void) const;
     virtual void use(const ICharacter& target);
 };

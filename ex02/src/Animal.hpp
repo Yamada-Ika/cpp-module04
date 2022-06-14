@@ -9,7 +9,7 @@ class Animal {
 
  public:
     Animal(void);
-    explicit Animal(std::string type);
+    Animal(std::string type);
     Animal(const Animal& other);
     virtual ~Animal(void);
     Animal& operator=(const Animal& other);

@@ -1,10 +1,20 @@
-#include <string>
+#ifndef CHARACTER_HPP
+# define CHARACTER_HPP
 
-class ICharacter {
+#include "ICharacter.hpp"
+#include "AMateria.hpp"
+
+class Character : public ICharacter {
+ private:
+    static const int kMaxSize = 4;
+    AMateria slot[kMaxSize];
+
  public:
-    virtual ~ICharacter() {}
-    virtual std::string const & getName() const = 0;
-    virtual void equip(AMateria* m) = 0;
-    virtual void unequip(int idx) = 0;
-    virtual void use(int idx, const ICharacter& target) = 0;
+    Character(void);
+
+    virtual void equip(AMateria *m);
+    virtual void unequip(int idx);
+    virtual void use(int idx, ICharacter& target);
 };
+
+#endif

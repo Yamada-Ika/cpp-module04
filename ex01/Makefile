@@ -47,4 +47,4 @@ leak-copy:
 	-export IYAMADA_CPP04_EX01_COPY=TRUE; c++ -o leak src/*.cpp && ./leak
 	rm -rf ./leak src/leak.cpp
 
-.PHONY: all clean fclean re run leak-normal
+.PHONY: all clean fclean re run run-normal run-normal2 run-copy leak-normal leak-normal2 leak-copy
