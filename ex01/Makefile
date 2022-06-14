@@ -1,7 +1,7 @@
-CC		:= c++
+CC			:= c++
 CXXFLAGS	:= -Wall -Wextra -Werror
-COPTS	:= -std=c++98 -pedantic -g -fsanitize=address
-INCLUDE	:= -I src
+COPTS		:= -std=c++98 -pedantic-errors
+INCLUDE		:= -I src
 
 NAME	:= a.out
 SRCS	:= \
@@ -27,4 +27,24 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+run-normal: all
+	export IYAMADA_CPP04_EX01_NORMAL=TRUE; ./a.out
+run-normal2: all
+	export IYAMADA_CPP04_EX01_NORMAL2=TRUE; ./a.out
+run-copy: all
+	export IYAMADA_CPP04_EX01_COPY=TRUE; ./a.out
+
+leak-normal:
+	@echo '#include <stdio.h>\n#include <unistd.h>\n#include <stdlib.h>\n#include <strings.h>\n__attribute__((destructor))\nvoid	destructor(void){char buf[50]; bzero(buf, 50); sprintf(buf, "leaks %d", getpid()); system(buf);}' > src/leak.cpp
+	-export IYAMADA_CPP04_EX01_NORMAL=TRUE; c++ -o leak src/*.cpp && ./leak
+	rm -rf ./leak src/leak.cpp
+leak-normal2:
+	@echo '#include <stdio.h>\n#include <unistd.h>\n#include <stdlib.h>\n#include <strings.h>\n__attribute__((destructor))\nvoid	destructor(void){char buf[50]; bzero(buf, 50); sprintf(buf, "leaks %d", getpid()); system(buf);}' > src/leak.cpp
+	-export IYAMADA_CPP04_EX01_NORMAL2=TRUE; c++ -o leak src/*.cpp && ./leak
+	rm -rf ./leak src/leak.cpp
+leak-copy:
+	@echo '#include <stdio.h>\n#include <unistd.h>\n#include <stdlib.h>\n#include <strings.h>\n__attribute__((destructor))\nvoid	destructor(void){char buf[50]; bzero(buf, 50); sprintf(buf, "leaks %d", getpid()); system(buf);}' > src/leak.cpp
+	-export IYAMADA_CPP04_EX01_COPY=TRUE; c++ -o leak src/*.cpp && ./leak
+	rm -rf ./leak src/leak.cpp
+
+.PHONY: all clean fclean re run leak-normal
