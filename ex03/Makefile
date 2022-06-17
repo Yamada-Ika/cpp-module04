@@ -40,11 +40,17 @@ run-clonetest: all
 run-copytest: all
 	export IYAMADA_REVIE_CPP04_EX03_COPYTEST=TRUE; ./a.out
 leak-pdftest: all
-	export IYAMADA_REVIE_CPP04_EX03_PDFTEST=TRUE; leaks -q -atExit -- ./a.out
+	@echo '#include <stdio.h>\n#include <unistd.h>\n#include <stdlib.h>\n#include <strings.h>\n__attribute__((destructor))\nvoid	destructor(void){char buf[50]; bzero(buf, 50); sprintf(buf, "leaks %d", getpid()); system(buf);}' > src/leak.cpp
+	export IYAMADA_REVIE_CPP04_EX03_PDFTEST=TRUE; c++ -o leak src/*.cpp && ./leak
+	rm -rf ./leak src/leak.cpp
 leak-clonetest: all
-	export IYAMADA_REVIE_CPP04_EX03_CLONETEST=TRUE; leaks -q -atExit -- ./a.out
+	@echo '#include <stdio.h>\n#include <unistd.h>\n#include <stdlib.h>\n#include <strings.h>\n__attribute__((destructor))\nvoid	destructor(void){char buf[50]; bzero(buf, 50); sprintf(buf, "leaks %d", getpid()); system(buf);}' > src/leak.cpp
+	export IYAMADA_REVIE_CPP04_EX03_CLONETEST=TRUE; c++ -o leak src/*.cpp && ./leak
+	rm -rf ./leak src/leak.cpp
 leak-copytest: all
-	export IYAMADA_REVIE_CPP04_EX03_COPYTEST=TRUE; leaks -q -atExit -- ./a.out
+	@echo '#include <stdio.h>\n#include <unistd.h>\n#include <stdlib.h>\n#include <strings.h>\n__attribute__((destructor))\nvoid	destructor(void){char buf[50]; bzero(buf, 50); sprintf(buf, "leaks %d", getpid()); system(buf);}' > src/leak.cpp
+	export IYAMADA_REVIE_CPP04_EX03_COPYTEST=TRUE; c++ -o leak src/*.cpp && ./leak
+	rm -rf ./leak src/leak.cpp
 
 debug:
 	$(CC) -o debug $(SRCS) $(INCLUDE) -g -fsanitize=address
