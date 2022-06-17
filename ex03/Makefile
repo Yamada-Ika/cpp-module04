@@ -52,9 +52,9 @@ leak-copytest: all
 	export IYAMADA_REVIE_CPP04_EX03_COPYTEST=TRUE; c++ -o leak src/*.cpp && ./leak
 	rm -rf ./leak src/leak.cpp
 
-debug:
+debug-copytest:
 	$(CC) -o debug $(SRCS) $(INCLUDE) -g -fsanitize=address
-	./debug
+	-export IYAMADA_REVIE_CPP04_EX03_COPYTEST=TRUE; ./debug
 	$(RM) debug
 
 .PHONY: all clean fclean re run
