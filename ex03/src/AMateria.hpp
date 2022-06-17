@@ -3,23 +3,26 @@
 
 #include <string>
 #include "Character.hpp"
+#include "ICharacter.hpp"
+
+class ICharacter;
 
 class AMateria {
  protected:
-    std::string type_;
+    std::string type;
 
  public:
-    AMateria(void);
-    AMateria(std::string const & type);
+    AMateria();
+    AMateria(std::string const & type_name);
     AMateria(const AMateria& other);
-    virtual ~AMateria(void);
+    virtual ~AMateria();
     AMateria& operator=(const AMateria& other);
 
     std::string const & getType(void) const;
-    void setType(std::string const& type);
+    void setType(std::string const& type_name);
 
-    virtual AMateria* clone(void) const = 0;
-    virtual void use(const ICharacter& target);
+    virtual AMateria* clone() const = 0;
+    virtual void use(ICharacter& target);
 };
 
 #endif

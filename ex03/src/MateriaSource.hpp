@@ -7,13 +7,14 @@
 class MateriaSource : public IMateriaSource {
  private:
     static const int kMaxSize = 4;
-    AMateria materias_[kMaxSize];
+    AMateria *materias_[kMaxSize];
 
  public:
-    MateriaSource(void);
-    MateriaSource(const MateriaSource& other);
-    ~MateriaSource(void);
-    MateriaSource &operator=(const MateriaSource& other);
+    MateriaSource();
+    ~MateriaSource();
+    // MateriaSource(const MateriaSource& other);
+    // ~MateriaSource(void);
+    // MateriaSource &operator=(const MateriaSource& other);
 
     void learnMateria(AMateria*);
     AMateria* createMateria(std::string const & type);

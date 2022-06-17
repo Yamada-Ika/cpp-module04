@@ -6,13 +6,13 @@
 
 class Ice : public AMateria {
  public:
-    Ice(void);
+    Ice();
     Ice(const Ice& other);
-    ~Ice(void);
+    ~Ice();
     Ice& operator=(const Ice& other);
 
     virtual AMateria* clone(void) const;
-    virtual void use(const ICharacter& target);
+    virtual void use(ICharacter& target);
 };
 
 #endif

@@ -2,28 +2,28 @@
 
 #include <iostream>
 
-Cure::Cure(void) {
+Cure::Cure() {
     //   std::cout << "Cure default constructor called" << std::endl;
-    type_ = "cure";
+    type = "cure";
 }
 
 Cure::Cure(const Cure& other) {
     *this = other;
 }
 
-Cure::~Cure(void) {
+Cure::~Cure() {
     // std::cout << "Cure destructor called" << std::endl;
 }
 
 Cure& Cure::operator=(const Cure& other) {
-    this->type_ = other.type_;
+    this->type = other.type;
     return *this;
 }
 
-AMateria* Cure::clone(void) {
+AMateria* Cure::clone(void) const {
     return new Cure();
 }
 
-void Cure::use(const ICharacter& target) {
+void Cure::use(ICharacter& target) {
   std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }

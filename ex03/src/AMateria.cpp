@@ -1,13 +1,13 @@
-#include "AMateria.hpp
+#include "AMateria.hpp"
 
 #include <string>
 #include <iostream>
 
 AMateria::AMateria(void) {}
 
-AMateria::AMateria(std::string const & type) {
+AMateria::AMateria(std::string const & type_name) {
     std::cout << "AMateria default constructor called" << std::endl;
-    type_ = type;
+    type = type_name;
 }
 
 AMateria::AMateria(const AMateria& other) {
@@ -17,15 +17,19 @@ AMateria::AMateria(const AMateria& other) {
 AMateria::~AMateria(void) {}
 
 AMateria& AMateria::operator=(const AMateria &other) {
-    this->type_ = other.type_;
+    this->type = other.type;
     return *this;
 }
 
-std::string const & AMateria::getType(void) {
-    return type_;
+std::string const & AMateria::getType(void) const {
+    return type;
 }
 
-void setType(std::string const& type) {
-    type_ = type;
+void AMateria::setType(std::string const& type_name) {
+    type = type_name;
+}
+
+void AMateria::use(ICharacter& target) {
+    std::cout << "* use materia for " << target.getName() << " *" << std::endl;
 }
 
