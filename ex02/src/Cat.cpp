@@ -2,13 +2,13 @@
 
 #include <iostream>
 
-Cat::Cat(void) {
+Cat::Cat(void) : brain_(new Brain())  {
     std::cout << "Cat default constructor called" << std::endl;
     type = "Cat";
     brain_ = new Brain();
 }
 
-Cat::Cat(const Cat& other) {
+Cat::Cat(const Cat& other) : brain_(NULL)  {
     std::cout << "Cat copy constructor called" << std::endl;
     *this = other;
 }

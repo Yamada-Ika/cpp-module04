@@ -2,13 +2,13 @@
 
 #include <iostream>
 
-Dog::Dog(void) {
+Dog::Dog(void) : brain_(new Brain()) {
     std::cout << "Dog default constructor called" << std::endl;
     type = "Dog";
     brain_ = new Brain();
 }
 
-Dog::Dog(const Dog& other) {
+Dog::Dog(const Dog& other) : brain_(NULL) {
     std::cout << "Dog copy constructor called" << std::endl;
     *this = other;
 }
