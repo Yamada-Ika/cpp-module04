@@ -5,7 +5,6 @@
 Dog::Dog(void) : brain_(new Brain()) {
     std::cout << "Dog default constructor called" << std::endl;
     type = "Dog";
-    brain_ = new Brain();
 }
 
 Dog::Dog(const Dog& other) : brain_(NULL) {
