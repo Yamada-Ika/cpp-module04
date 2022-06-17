@@ -23,12 +23,10 @@ Cat& Cat::operator=(const Cat& other) {
 
     if (this == &other) return *this;
 
-    Brain* brain = new Brain();
-    *brain = *other.brain_;
-
     this->type = other.type;
     delete this->brain_;
-    this->brain_ = brain;
+    this->brain_ = new Brain();
+    *this->brain_ = *other.brain_;
     return *this;
 }
 
