@@ -2,15 +2,21 @@
 
 #include <string>
 
-MateriaSource::MateriaSource(void) {
+void MateriaSource::initMaterias() {
     for (int i = 0; i < kMaxSize; ++i) {
         materias_[i] = NULL;
     }
 }
 
-// MateriaSource::MateriaSource(const MateriaSource& other) {
-//     *this = other;
-// }
+
+MateriaSource::MateriaSource(void) {
+    initMaterias();
+}
+
+MateriaSource::MateriaSource(const MateriaSource& other) {
+    initMaterias();
+    *this = other;
+}
 
 MateriaSource::~MateriaSource(void) {
     for (int i = 0; i < kMaxSize; ++i) {
@@ -18,9 +24,17 @@ MateriaSource::~MateriaSource(void) {
     }
 }
 
-// MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
-//     return *this;
-// }
+MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
+    for (int i = 0; i < kMaxSize; ++i) {
+        delete this->materias_[i];
+        if (other.materias_[i] == NULL) {
+            this->materias_[i] = NULL;
+            continue;
+        }
+        this->materias_[i] = other.materias_[i]->clone();
+    }
+    return *this;
+}
 
 void MateriaSource::learnMateria(AMateria* m) {
     if (m == NULL) return;
@@ -39,7 +53,6 @@ AMateria* MateriaSource::createMateria(std::string const & type) {
             continue;
         }
         if (materias_[i]->getType() == type) {
-            // return new AMateria(type);
             return materias_[i]->clone();
         }
     }
